@@ -8,11 +8,12 @@ import {
   updateMicroApp,
   omitSharedProps,
 } from '@qiankunjs/ui-shared';
-import React, { type Ref, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import MicroAppLoader from './MicroAppLoader';
 
-export type Props = SharedProps & SharedSlots<React.ReactNode> & Record<string, unknown>;
+type InternalProps = SharedProps & SharedSlots<React.ReactNode>;
+export type Props = InternalProps & Record<string, unknown>;
 
 function useDeepCompare<T>(value: T): T {
   const ref = useRef<T>(value);
@@ -23,7 +24,7 @@ function useDeepCompare<T>(value: T): T {
   return ref.current;
 }
 
-export const MicroApp = forwardRef((componentProps: Props, componentRef: Ref<MicroAppType | undefined>) => {
+const MicroAppComponent = forwardRef<MicroAppType | undefined, InternalProps>((componentProps, componentRef) => {
   const { name, autoSetLoading, autoCaptureError, wrapperClassName, className, loader, errorBoundary } = componentProps;
 
   const [loading, setLoading] = useState(true);
@@ -111,3 +112,7 @@ export const MicroApp = forwardRef((componentProps: Props, componentRef: Ref<Mic
     <div ref={containerRef} className={microAppClassName} />
   );
 });
+
+export const MicroApp = MicroAppComponent as unknown as React.ForwardRefExoticComponent<
+  Props & React.RefAttributes<MicroAppType | undefined>
+>;
