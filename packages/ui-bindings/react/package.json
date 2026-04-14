@@ -8,8 +8,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "father build",
-    "dev": "father dev",
-    "test": "exit 0"
+    "dev": "father dev"
   },
   "author": "Bravepg",
   "license": "MIT",

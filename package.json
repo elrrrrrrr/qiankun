@@ -18,7 +18,7 @@
     "docs:preview": "vitepress preview docs",
     "ci": "ut run build && ut run eslint && ut run prettier:check",
     "ci:publish": "changeset publish",
-    "test": "ut run --workspaces test",
+    "test": "ut run --workspaces --if-present test",
     "prepare": "husky install",
     "clean": "rimraf node_modules **/*/node_modules"
   },
