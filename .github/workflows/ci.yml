@@ -26,6 +26,8 @@ jobs:
 
       - name: Install utoo
         uses: utooland/setup-utoo@v1
+        with:
+          utoo-version: 1.0.26
 
       - run: ut install --from pnpm --ignore-scripts
 
@@ -58,6 +60,8 @@ jobs:
 
       - name: Install utoo
         uses: utooland/setup-utoo@v1
+        with:
+          utoo-version: 1.0.26
 
       - run: ut install --from pnpm --ignore-scripts
 
