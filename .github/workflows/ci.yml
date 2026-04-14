@@ -19,30 +19,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
 
-      - run: corepack enable # https://nodejs.org/api/corepack.html
+      - name: Install utoo
+        uses: utooland/setup-utoo@v1
 
-      - run: pnpm install
+      - run: ut install --from pnpm
 
       - name: TS Build Check
-        run: pnpm run build
+        run: ut run build
 
       - name: Run eslint
-        run: pnpm run eslint
+        run: ut run eslint
 
       - name: Run prettier
-        run: pnpm run prettier:check
+        run: ut run prettier:check
 
       - name: Doc Build check
-        run: pnpm run docs:build
+        run: ut run docs:build
 
   unit-test:
     runs-on: ubuntu-latest
@@ -54,18 +51,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
 
-      - run: corepack enable # https://nodejs.org/api/corepack.html
+      - name: Install utoo
+        uses: utooland/setup-utoo@v1
 
-      - run: pnpm install
+      - run: ut install --from pnpm
 
       - name: Run unit test
-        run: pnpm run test
+        run: ut run test

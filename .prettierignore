@@ -18,3 +18,5 @@ packages/create-qiankun/template
 
 # changeset 会修改这个文件，导致 prettier:check 失败
 packages/**/*/package.json
+# ut install 会重写 workspaces 字段格式
+package.json

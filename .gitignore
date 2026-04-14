@@ -28,3 +28,4 @@ packages/sandbox/src/core/sandbox/globals.ts
 .dumi/tmp
 .dumi/tmp-test
 .dumi/tmp-production
+.utoo.toml
