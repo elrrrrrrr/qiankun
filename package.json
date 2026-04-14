@@ -5,20 +5,20 @@
     "node": ">=16"
   },
   "scripts": {
-    "start:example": "pnpm run build && npm run start:main",
+    "start:example": "ut run build && npm run start:main",
     "start:main": "cd ./examples/main && npm run dev",
-    "build": "pnpm -r run build",
+    "build": "ut run --workspaces build",
     "prerelease:alpha": "changeset pre enter alpha && changeset && changeset version",
-    "release:alpha": "pnpm run build && changeset publish && changeset pre exit",
+    "release:alpha": "ut run build && changeset publish && changeset pre exit",
     "eslint": "eslint packages/",
     "prettier": "prettier --write .",
     "prettier:check": "prettier -c .",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "ci": "pnpm run build && pnpm run eslint && pnpm run prettier:check",
+    "ci": "ut run build && ut run eslint && ut run prettier:check",
     "ci:publish": "changeset publish",
-    "test": "pnpm -r run test",
+    "test": "ut run --workspaces --if-present test",
     "prepare": "husky install",
     "clean": "rimraf node_modules **/*/node_modules"
   },
@@ -64,5 +64,6 @@
   "packageManager": "pnpm@10.28.2",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "workspaces": ["packages/*", "packages/ui-bindings/*"]
 }
